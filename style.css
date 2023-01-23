@@ -1,3 +1,10 @@
+.big {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 .rate {
     float: left;
@@ -32,4 +39,49 @@
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
+}
+
+.index {
+    background-image: url(karen-zhao-jLRIsfkWRGo-unsplash.jpg);
+    background-size: cover;
+}
+
+.cadastrar {
+    background-image: url(denise-jans-OaVJQZ-nFD0-unsplash.jpg);
+    background-size: cover;
+}
+
+.consultar {
+    background-image: url(kilyan-sockalingum-nW1n9eNHOsc-unsplash.jpg);
+    background-size: cover;
+}
+
+.resenha {
+    background-image: url(felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
+    background-size: cover;
+}
+
+/* Added to bootstrap */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardpadding {
+    padding: 2rem;
+}
+
+.nota {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+.card-text{
+    height: 80px;
+    overflow: hidden;
 }

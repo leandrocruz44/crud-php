@@ -11,66 +11,115 @@ include_once "conexao.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
-<body>
-    <a href="index.php">Início</a>
-    <a href="cadastrar.php">Cadastrar Filmes</a>
-    <h1>Filmes Assistidos</h1>
-    <?php
-        $db = connect();
 
-        $filmesAssistidos = $db->query("SELECT * FROM avaliacao_de_filmes");
-        $filmes = $filmesAssistidos->fetchAll(PDO::FETCH_ASSOC);
-        function estrelas($nota) {
-            switch ($nota) {
-                case '5':
-                    return '⋆⋆⋆⋆⋆';
-                    break;
-                case '4':
-                    return '⋆⋆⋆⋆';
-                    break;
-                case '3':
-                    return '⋆⋆⋆';
-                    break;
-                case '2':
-                    return '⋆⋆';
-                    break;
-                case '1':
-                    return '⋆';
-                    break;
-            }
-    
-        } 
+<?php
+    $db = connect();
 
-        function checkFavorito($favorito) {
-            if ($favorito === 'sim') {
-                return '✔';
-            }
+    $filmesAssistidos = $db->query("SELECT * FROM avaliacao_de_filmes");
+    $filmes = $filmesAssistidos->fetchAll(PDO::FETCH_ASSOC);
+    function estrelas($nota) {
+        switch ($nota) {
+            case '5':
+                return '⭐⭐⭐⭐⭐';
+                break;
+            case '4':
+                return '⭐⭐⭐⭐';
+                break;
+            case '3':
+                return '⭐⭐⭐';
+                break;
+            case '2':
+                return '⭐⭐';
+                break;
+            case '1':
+                return '⭐';
+                break;
         }
 
-        $db = null;
+    } 
 
-    ?>
-    <table>
-        <thead>
-            <th>Filme</th>
-            <th>Nota</th>
-            <th>Resenha</th>
-            <th>Favorito</th>
-        </thead>
-        <tbody>
-            <?php foreach ($filmes as $filme): ?>
-                <tr>
-                    <td><?=$filme['nome_filme']?></td>
-                    <td><?=estrelas($filme['nota'])?></td>
-                    <td><a href="ler_resenha.php?id=<?=$filme['id']?>">Ler resenha</td>
-                    <td><?=checkFavorito($filme['favorito'])?></td>
-                    <td><a href="deletar.php?id=<?=$filme['id']?>">Deletar</td>
-                    <td><a href="editar.php?id=<?=$filme['id']?>">Editar</td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    
+    function checkFavorito($favorito) {
+        if ($favorito === 'sim') {
+            return '✔ Favorito';
+        }
+    }
+
+    $db = null;
+
+?>
+<body class="consultar">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row justify-content-center">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.php">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="cadastrar.php">+ Cadastrar Filmes</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row text-center">
+                    <div class="col text-white">
+                        <h1>Filmes Assistidos</h1>
+                    </div>
+                </div>
+                                
+                <div id="cards-container" class="row my-3">
+                    <?php foreach ($filmes as $filme): ?>
+                    <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+                        <div class="card bg-dark text-white border-danger">
+                            <div class="card-header bg-danger">
+                                <div class="row justify-content-around">
+                                    <div class="col"><?=estrelas($filme['nota'])?></div>
+                                    <div class="col text-right"><?=checkFavorito($filme['favorito'])?></div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><?=$filme['nome_filme']?></h5>
+                                <p class="card-text cuzi"><?=$filme['resenha']?></p>
+                                <div class="row justify-content-around">
+                                    <a href="ler_resenha.php?id=<?=$filme['id']?>" class="btn btn-success">Resenha</a>
+                                    <a href="editar.php?id=<?=$filme['id']?>" class="btn btn-primary">Editar</a>
+                                    <a href="deletar.php?id=<?=$filme['id']?>" class="btn btn-danger">Deletar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>   
 </body>
+<!-- <script>
+
+    function isOverflown(element) {
+        return element.scrollHeight > element.clientHeight;
+    }
+
+    let cardContainer = document.getElementById('cards-container');
+    let quant = cardContainer.childElementCount;
+
+    for (let i = 0; i < quant; i++) {
+        let card = cardContainer.children[i];
+        let x = card.querySelector('.cuzi');
+        if (isOverflown(x)) {
+            let link = document.createElement('a');
+            link.setAttribute('href', 'ler_resenha.php?id=<?=$filme['id']?>');
+            link.setAttribute('class', 'btn btn-success');
+            card.appendChild(link);
+        }
+    }
+
+</script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </html>
