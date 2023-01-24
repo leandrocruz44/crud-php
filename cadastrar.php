@@ -32,9 +32,9 @@ include_once "conexao.php";
         }
 
         if (isset($_POST['favorito'])) {
-            $favorito = "sim";
+            $favorito = 1;
         } else {
-            $favorito = "nao";
+            $favorito = 0;
         }
 
         if ($nome_filme === '' || $nota === '') {
@@ -57,7 +57,7 @@ include_once "conexao.php";
     <div class="container">
         <div class="row">
             <div class="col main">
-                <ul class="nav">
+                <ul class="nav font-weight-bolder">
                     <li class="nav-item">
                         <a class="nav-link active" href="index.php">Início</a>
                     </li>

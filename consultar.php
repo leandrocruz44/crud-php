@@ -42,7 +42,7 @@ include_once "conexao.php";
     } 
 
     function checkFavorito($favorito) {
-        if ($favorito === 'sim') {
+        if ($favorito == 1) {
             return '✔ Favorito';
         }
     }
@@ -54,7 +54,7 @@ include_once "conexao.php";
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center font-weight-bolder">
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link active" href="index.php">Início</a>
@@ -82,12 +82,12 @@ include_once "conexao.php";
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"><?=$filme['nome_filme']?></h5>
+                                <h5 class="card-title"><?=$filme['nome_filme'];?></h5>
                                 <p class="card-text cuzi"><?=$filme['resenha']?></p>
                                 <div class="row justify-content-around">
                                     <a href="ler_resenha.php?id=<?=$filme['id']?>" class="btn btn-success">Resenha</a>
                                     <a href="editar.php?id=<?=$filme['id']?>" class="btn btn-primary">Editar</a>
-                                    <a href="deletar.php?id=<?=$filme['id']?>" class="btn btn-danger">Deletar</a>
+                                    <a href="deletar.php?id=<?=$filme['id'];?>" class="btn btn-danger">Deletar</a>
                                 </div>
                             </div>
                         </div>
@@ -98,27 +98,7 @@ include_once "conexao.php";
         </div>
     </div>   
 </body>
-<!-- <script>
 
-    function isOverflown(element) {
-        return element.scrollHeight > element.clientHeight;
-    }
-
-    let cardContainer = document.getElementById('cards-container');
-    let quant = cardContainer.childElementCount;
-
-    for (let i = 0; i < quant; i++) {
-        let card = cardContainer.children[i];
-        let x = card.querySelector('.cuzi');
-        if (isOverflown(x)) {
-            let link = document.createElement('a');
-            link.setAttribute('href', 'ler_resenha.php?id=<?=$filme['id']?>');
-            link.setAttribute('class', 'btn btn-success');
-            card.appendChild(link);
-        }
-    }
-
-</script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

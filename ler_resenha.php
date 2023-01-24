@@ -66,22 +66,19 @@ include_once "conexao.php";
                         <a class="nav-link active" href="consultar.php">Consultar Filmes</a>
                     </li>
                 </ul>
-                <div class="card text-center" style="width: 60vw">
-                    <div class="card-header">
+                <div class="card text-center border-danger" style="width: 60vw">
+                    <div class="card-header bg-danger text-white">
                         <h1>Resenha de <?php print_r($resenha['nome_filme'])?></h1>
                     </div>
                     <div class="card-body text-center" style="height: 70vh">
                         <p class="card-text overflow-auto" style="height: 65vh"><?php print_r($resenha['resenha'])?></p>
                     </div>
-                    <div class="card-footer text-muted text-center">
+                    <div class="card-footer text-muted text-center bg-danger">
                         <?=estrelas($resenha['nota'])?>
                     </div>
                 </div>
             </div>
         </div> 
     </div>
-    <h1></h1>
-    <p style="width: 500px"></p>
-
 </body>
 </html>

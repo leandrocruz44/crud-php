@@ -67,7 +67,7 @@ include_once "conexao.php";
     <div class="container">
         <div class="row">
             <div class="col main">
-                <ul class="nav">
+                <ul class="nav font-weight-bolder">
                     <li class="nav-item">
                         <a class="nav-link active" href="index.php">Início</a>
                     </li>
@@ -103,7 +103,7 @@ include_once "conexao.php";
                         <label for="resenha">Resenha</label><br>
                         <textarea name="resenha" id="resenha" cols="30" rows="10" style="padding: 5px;"><?=$dados['resenha']?></textarea><br><br>
                         <label for="favorito">Favorito?</label>
-                        <input type="checkbox" name="favorito" id="favorito" <?php if ($dados['favorito'] === 'sim') {echo 'checked';}?>><br><br>
+                        <input type="checkbox" name="favorito" id="favorito" <?php if ($dados['favorito'] == 1) {echo 'checked';}?>><br><br>
                         <input type="submit" name="cadastrar" value="Finalizar" class="btn btn-danger">
                     </form>
                 </div>
