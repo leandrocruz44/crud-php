@@ -30,6 +30,8 @@ include_once "conexao.php";
     }
 
     $aviso = '';
+    $mensagem = '';
+
     if (!empty($_POST)) {
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         $nome_filme = trim(strip_tags($_POST['nome_filme']));
@@ -54,11 +56,13 @@ include_once "conexao.php";
         if ($nome_filme === '' || $nota === '') {
             $aviso = "Indique o nome do filme e a nota";
         } else {
+            $mensagem = "Filme editado com sucesso!";
+
             $edit_dados = $db->prepare("UPDATE avaliacao_de_filmes SET nome_filme = :nome_filme, nota = :nota, resenha = :resenha, favorito = :favorito WHERE id = :id");
 
             $edit_dados->execute(["nome_filme"=>$nome_filme, "nota"=>$nota, "resenha"=>$resenha, "favorito"=>$favorito, "id"=>$id]);
 
-            header('location:consultar.php');
+            header('Refresh: 2; url=consultar.php');
         }
 
         $db = null;
@@ -82,6 +86,7 @@ include_once "conexao.php";
                 </ul>
                 <div class="card bg-dark text-white text-center border-danger rounded cardpadding my-2">
                     <p class="text-danger"><?=$aviso?></p>
+                    <p style="background-color: lime; color: purple"><?php echo $mensagem;?></p>
                     <h4>Editar Filme</h4>
                     <form name="cadastrar_filme" action="" method="post">
                         <input type="hidden" name="id" value="<?=$dados['id']?>">

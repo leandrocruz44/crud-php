@@ -40,7 +40,7 @@ include_once "conexao.php";
         }
 
         if ($nome_filme === '' || $nota === '') {
-            $aviso = "Preencha os campos obrigatórios.";
+            $aviso = "Indique o nome do filme e a nota";
         } else {
             $mensagem = "Filme cadastrado com sucesso!";
 
@@ -74,8 +74,8 @@ include_once "conexao.php";
                     <p style="background-color: lime; color: purple"><?php echo $mensagem;?></p>
                     <h4>Cadastrar Filme</h4>
                     <form name="cadastrar_filme" action="" method="post">
-                        <label for="nome_filme">Nome do Filme</label><br>
-                        <input type="text" name="nome_filme" id="nome_filme"><br><br>
+                        <div class="row justify-content-center"><label for="nome_filme">Nome do Filme</label></div>
+                        <div class="row justify-content-center"><input type="text" name="nome_filme" id="nome_filme"></div>
                         <div class="nota my-3">
                             <label for="nota">Nota</label>
                             <div class="rate">
@@ -90,11 +90,13 @@ include_once "conexao.php";
                                 <input type="radio" id="star1" name="nota" value="1" />
                                 <label for="star1" title="Péssimo">1 star</label>
                             </div>
-                        </div><br>
-                        <label for="resenha">Resenha</label><br>
-                        <textarea name="resenha" id="resenha" cols="30" rows="10" style="padding: 5px;"></textarea><br><br>
-                        <label for="favorito">Favorito?</label>
-                        <input type="checkbox" name="favorito" id="favorito"><br><br>
+                        </div>
+                        <div class="row"><label for="resenha">Resenha</label></div>
+                        <div class="row"><textarea name="resenha" id="resenha" cols="30" rows="10" style="padding: 5px;"></textarea></div>
+                        <div class="row my-5 justify-content-center">
+                            <div class="col text-right"><label for="favorito">Favorito?</label></div>
+                            <div class="col"><input type="checkbox" name="favorito" id="favorito"></div>
+                        </div>
                         <input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-danger">
                     </form>
                 </div>
