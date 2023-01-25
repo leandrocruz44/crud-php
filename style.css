@@ -44,21 +44,25 @@
 .index {
     background-image: url(karen-zhao-jLRIsfkWRGo-unsplash.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .cadastrar {
     background-image: url(denise-jans-OaVJQZ-nFD0-unsplash.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .consultar {
     background-image: url(kilyan-sockalingum-nW1n9eNHOsc-unsplash.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .resenha {
     background-image: url(felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 /* Added to bootstrap */

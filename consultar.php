@@ -36,7 +36,7 @@ include_once "conexao.php";
             return "SELECT * FROM avaliacao_de_filmes";
         }
     }
-
+ 
     $filmesAssistidos = $db->query(determinarOrdem());
     $filmes = $filmesAssistidos->fetchAll(PDO::FETCH_ASSOC);
     function estrelas($nota) {

@@ -16,6 +16,19 @@ include_once "conexao.php";
 </head>
 
 <?php
+
+    if (!empty($_GET)) {
+        $filme_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+        $db = connect();
+
+        $dados_existentes = $db->prepare("SELECT * FROM avaliacao_de_filmes WHERE id = :id");
+        $dados_existentes->execute(["id"=>$filme_id]);
+        $dados = $dados_existentes->fetch(PDO::FETCH_ASSOC);
+
+        $db = null;
+    }
+
     $aviso = '';
     if (!empty($_POST)) {
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -33,9 +46,9 @@ include_once "conexao.php";
         }
 
         if (isset($_POST['favorito'])) {
-            $favorito = "sim";
+            $favorito = 1;
         } else {
-            $favorito = "nao";
+            $favorito = 0;
         }
 
         if ($nome_filme === '' || $nota === '') {
@@ -51,17 +64,6 @@ include_once "conexao.php";
         $db = null;
     }
 
-    if (!empty($_GET)) {
-        $filme_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-
-        $db = connect();
-
-        $dados_existentes = $db->prepare("SELECT * FROM avaliacao_de_filmes WHERE id = :id");
-        $dados_existentes->execute(["id"=>$filme_id]);
-        $dados = $dados_existentes->fetch(PDO::FETCH_ASSOC);
-
-        $db = null;
-    }
 ?>
 <body class="cadastrar">   
     <div class="container">
@@ -83,8 +85,8 @@ include_once "conexao.php";
                     <h4>Editar Filme</h4>
                     <form name="cadastrar_filme" action="" method="post">
                         <input type="hidden" name="id" value="<?=$dados['id']?>">
-                        <label for="nome_filme">Nome do Filme</label><br>
-                        <input type="text" name="nome_filme" id="nome_filme" value="<?=$dados['nome_filme']?>"><br><br>
+                        <div class="row justify-content-center"><label for="nome_filme">Nome do Filme</label></div>
+                        <div class="row justify-content-center"><input type="text" name="nome_filme" id="nome_filme" value="<?=$dados['nome_filme']?>"></div>
                         <div class="nota my-3">
                             <label for="nota">Nota</label>
                             <div class="rate">
@@ -99,11 +101,13 @@ include_once "conexao.php";
                                 <input type="radio" id="star1" name="nota" value="1" <?php if ($dados['nota'] === '1') {echo 'checked';}?> />
                                 <label for="star1" title="Péssimo">1 star</label>
                             </div>
-                        </div><br>
-                        <label for="resenha">Resenha</label><br>
-                        <textarea name="resenha" id="resenha" cols="30" rows="10" style="padding: 5px;"><?=$dados['resenha']?></textarea><br><br>
-                        <label for="favorito">Favorito?</label>
-                        <input type="checkbox" name="favorito" id="favorito" <?php if ($dados['favorito'] == 1) {echo 'checked';}?>><br><br>
+                        </div>
+                        <div class="row"><label for="resenha">Resenha</label></div>
+                        <div class="row"><textarea name="resenha" id="resenha" cols="30" rows="10" style="padding: 5px;"><?=$dados['resenha']?></textarea></div>
+                        <div class="row justify-content-center my-5">
+                            <div class="col text-right"><label for="favorito">Favorito?</label></div>
+                            <div class="col"><input type="checkbox" name="favorito" id="favorito" <?php if ($dados['favorito'] == 1) {echo 'checked';}?>></div>
+                        </div>
                         <input type="submit" name="cadastrar" value="Finalizar" class="btn btn-danger">
                     </form>
                 </div>

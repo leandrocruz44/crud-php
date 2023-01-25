@@ -15,12 +15,14 @@ include_once "conexao.php";
 
 <?php
     $aviso = '';
+    $mensagem = '';
 
     if (!empty($_POST)) {
         $nome_filme = trim(strip_tags($_POST['nome_filme']));
         $nota = '';
         $resenha = trim(strip_tags($_POST['resenha']));
         $favorito = '';
+        
         
 
         $db = connect();
@@ -40,11 +42,13 @@ include_once "conexao.php";
         if ($nome_filme === '' || $nota === '') {
             $aviso = "Preencha os campos obrigatórios.";
         } else {
+            $mensagem = "Filme cadastrado com sucesso!";
+
             $add_dados = $db->prepare("INSERT INTO avaliacao_de_filmes (nome_filme, nota, resenha, favorito) VALUES (:nome_filme, :nota, :resenha, :favorito)");
 
             $add_dados->execute(["nome_filme"=>$nome_filme, "nota"=>$nota, "resenha"=>$resenha, "favorito"=>$favorito]);
 
-            header('location:consultar.php');
+            header('Refresh: 2; url=consultar.php');
 
         }
 
@@ -67,6 +71,7 @@ include_once "conexao.php";
                 </ul>
                 <div class="card bg-dark text-white text-center border-danger rounded cardpadding my-2">
                     <p class="text-danger"><?=$aviso?></p>
+                    <p style="background-color: lime; color: purple"><?php echo $mensagem;?></p>
                     <h4>Cadastrar Filme</h4>
                     <form name="cadastrar_filme" action="" method="post">
                         <label for="nome_filme">Nome do Filme</label><br>

@@ -3,7 +3,7 @@
     function connect() {
         $hostname = "localhost";
         $username = "root";
-        $password = "root";
+        $password = "";
         $dbname = "projeto_crud";
         $port = 3306;
 

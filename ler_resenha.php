@@ -70,7 +70,7 @@ include_once "conexao.php";
                     <div class="card-header bg-danger text-white">
                         <h1>Resenha de <?php print_r($resenha['nome_filme'])?></h1>
                     </div>
-                    <div class="card-body text-center" style="height: 70vh">
+                    <div class="card-body text-left" style="height: 70vh">
                         <p class="card-text overflow-auto" style="height: 65vh"><?php print_r($resenha['resenha'])?></p>
                     </div>
                     <div class="card-footer text-muted text-center bg-danger">
