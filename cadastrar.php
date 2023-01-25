@@ -38,7 +38,7 @@ include_once "conexao.php";
         }
 
         if ($nome_filme === '' || $nota === '') {
-            $aviso = "Preencha os campos obrigatórios";
+            $aviso = "Preencha os campos obrigatórios.";
         } else {
             $add_dados = $db->prepare("INSERT INTO avaliacao_de_filmes (nome_filme, nota, resenha, favorito) VALUES (:nome_filme, :nota, :resenha, :favorito)");
 

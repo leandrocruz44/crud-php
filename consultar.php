@@ -18,7 +18,26 @@ include_once "conexao.php";
 <?php
     $db = connect();
 
-    $filmesAssistidos = $db->query("SELECT * FROM avaliacao_de_filmes");
+    function determinarOrdem() {
+        if (!empty($_POST)){
+            $ordem = $_POST['ordenar'];
+            if ($ordem === "alfaAZ") {
+                return "SELECT * FROM avaliacao_de_filmes ORDER BY nome_filme";
+            } elseif ($ordem === "alfaZA") {
+                return "SELECT * FROM avaliacao_de_filmes ORDER BY nome_filme DESC";
+            } elseif ($ordem === "maior") {
+                return "SELECT * FROM avaliacao_de_filmes ORDER BY nota DESC";
+            } elseif ($ordem === "menor") {
+                return "SELECT * FROM avaliacao_de_filmes ORDER BY nota ASC";
+            } else {
+                return "SELECT * FROM avaliacao_de_filmes";
+            }
+        } else {
+            return "SELECT * FROM avaliacao_de_filmes";
+        }
+    }
+
+    $filmesAssistidos = $db->query(determinarOrdem());
     $filmes = $filmesAssistidos->fetchAll(PDO::FETCH_ASSOC);
     function estrelas($nota) {
         switch ($nota) {
@@ -70,6 +89,22 @@ include_once "conexao.php";
                         <h1>Filmes Assistidos</h1>
                     </div>
                 </div>
+
+                <form action="" method="post">
+                    <select class="btn btn-dark text-left" name="ordenar" id="ordenar">
+                        <option>Ordenar por:</option>
+                        <optgroup label="Alfabético">
+                            <option value="alfaAZ">A-Z</option>
+                            <option value="alfaZA">Z-A</option>
+                        </optgroup>
+                        <optgroup label="Nota">
+                            <option value="maior">Maior</option>
+                            <option value="menor">Menor</option>
+                        </optgroup>
+                        
+                    </select>
+                    <input class="btn btn-primary" type="submit" value="Pronto" />
+                </form>
                                 
                 <div id="cards-container" class="row my-3">
                     <?php foreach ($filmes as $filme): ?>
