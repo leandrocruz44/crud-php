@@ -122,7 +122,7 @@ include_once "conexao.php";
                                 <div class="row justify-content-around">
                                     <a href="ler_resenha.php?id=<?=$filme['id']?>" class="btn btn-success">Resenha</a>
                                     <a href="editar.php?id=<?=$filme['id']?>" class="btn btn-primary">Editar</a>
-                                    <a href="deletar.php?id=<?=$filme['id'];?>" class="btn btn-danger">Deletar</a>
+                                    <a href="confirmar_deletar.php?id=<?=$filme['id'];?>" class="btn btn-danger">Deletar</a>
                                 </div>
                             </div>
                         </div>
